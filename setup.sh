@@ -10,7 +10,7 @@ fi
 #Make a backup of existing dotconf files and copy over the new ones.
 BACKUP_DIR=~/.dotbackup/$(date +%y%m%d%H%M%S)
 mkdir -p $BACKUP_DIR
-for file in ~/.dotconf/*; do
+for file in ~/.dotconf/.[^.]*; do
     #Use greedy glob removal to grab the basename of each dotfile.
     BASENAME=${file##*/}
     mv ~/$BASENAME $BACKUP_DIR/$BASENAME
