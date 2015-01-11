@@ -14,7 +14,7 @@ for file in ~/.dotconf/.[^.]*; do
     #Use greedy glob removal to grab the basename of each dotfile.
     BASENAME=${file##*/}
     if [ $BASENAME != ".git" ] && [ $BASENAME != ".gitmodules" ]; then
-        if [ -f ~/$BASENAME ]; then
+        if [ -e ~/$BASENAME ]; then
             cp -r ~/$BASENAME $BACKUP_DIR/$BASENAME
         fi
         if [ -d ~/$BASENAME ]; then
