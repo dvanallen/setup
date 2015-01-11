@@ -11,13 +11,17 @@ fi
 BACKUP_DIR=~/.dotbackup/$(date +%y%m%d%H%M%S)
 mkdir -p $BACKUP_DIR
 for file in ~/.dotconf/.[^.]*; do
+    #Use greedy glob removal to grab the basename of each dotfile.
     BASENAME=${file##*/}
-    if [[ $BASENAME != ".git" ]] && [[ $BASENAME != ".gitmodules" ]]; then
-        #Use greedy glob removal to grab the basename of each dotfile.
-        if [ -f ~/.$BASENAME ]; then
-            mv ~/$BASENAME $BACKUP_DIR/$BASENAME
+    if [ $BASENAME != ".git" ] && [ $BASENAME != ".gitmodules" ]; then
+        if [ -f ~/$BASENAME ]; then
+            cp -r ~/$BASENAME $BACKUP_DIR/$BASENAME
         fi
-        cp -r ~/.dotconf/$BASENAME ~/$BASENAME
+        if [ -d ~/$BASENAME ]; then
+            cp -r ~/.dotconf/$BASENAME/. ~/$BASENAME
+        else
+            cp -r ~/.dotconf/$BASENAME ~/$BASENAME
+        fi
     fi
 done
 
