@@ -35,7 +35,7 @@ if [ "$(uname -s)" = Darwin ]; then
 		ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 		PATH=$PATH:/usr/local/bin
 	fi
-	brew install cmake git tmux vim mvim mobile-shell openssh openssl nmap bash coreutils node
+	brew install cmake git tmux vim macvim mobile-shell openssh openssl nmap bash coreutils node
 fi
 
 #Vim setup
