@@ -25,9 +25,24 @@ for file in ~/.dotconf/.[^.]*; do
     fi
 done
 
+#Fix SSH directory permissions
 chmod 700 ~/.ssh
 chmod -R 600 ~/.ssh/*
 
+if [ "$(uname -s)" = Darwin ]; then
+	if ! which -s brew; then
+		echo "Installing homebrew"
+		ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+		PATH=$PATH:/usr/local/bin
+	fi
+	brew install cmake git tmux vim mvim mobile-shell openssh openssl nmap bash coreutils node
+fi
+
+#Vim setup
 mkdir ~/.vim/autoload && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+cd ~/.vim/bundle/YouCompleteMe
+./install.sh --clang-completer
+cd ~/.vim/bundle/tern_for_vim
+npm install
 
 echo "Don't forget to source the shell profile!"
