@@ -28,4 +28,6 @@ done
 chmod 700 ~/.ssh
 chmod -R 600 ~/.ssh/*
 
+mkdir ~/.vim/autoload && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
 echo "Don't forget to source the shell profile!"
