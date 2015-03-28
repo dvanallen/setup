@@ -25,4 +25,7 @@ for file in ~/.dotconf/.[^.]*; do
     fi
 done
 
+chmod 700 ~/.ssh
+chmod -R 600 ~/.ssh/*
+
 echo "Don't forget to source the shell profile!"
