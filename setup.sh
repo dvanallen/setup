@@ -35,13 +35,17 @@ if [ "$(uname -s)" = Darwin ]; then
 		ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 		PATH=$PATH:/usr/local/bin
 	fi
-	brew install cmake git tmux vim macvim mobile-shell openssh openssl nmap bash coreutils node sshrc
+	brew install cmake git tmux vim macvim mobile-shell openssh openssl nmap bash coreutils node sshrc tar
 fi
 
 #Vim setup
 mkdir ~/.vim/autoload && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 cd ~/.vim/bundle/YouCompleteMe
-./install.sh --clang-completer
+if [[ "$(uname -s)" =~ .*BSD ]]; then
+        ./install.sh --clang-completer --system-libclang --system-boost
+else
+        ./install.sh --clang-completer
+fi
 cd ~/.vim/bundle/tern_for_vim
 npm install
 
